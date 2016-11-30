@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.mapper.UserMapper">
+	<!-- 这里需修改 -->
+	<resultMap id="BaseResultMap" type="User"></resultMap>
+	<parameterMap id="BaseParameterMap" type="User"></parameterMap>
+	<!-- 通用要显示的字段 -->
+	<sql id="Base_Column_List">
+		`id`, `username`, `birthday`, `sex`, `address`
+	</sql>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+
+
+
+	<!-- Example的所有单表操作start -->
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="BaseExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" /><!-- 显示的基本字段 -->
+		from user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" /><!-- SQL条件语句 -->
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<!-- 这里还要判断是否为空，进行更新。更安全，但是速度稍慢 -->
+	<update id="updateByExampleSelective" parameterType="map">
+		update user
+		<set>
+			<if test="user.id != null">
+				id = #{user.id},
+			</if>
+			<if test="user.username != null">
+				username = #{user.username},
+			</if>
+			<if test="user.birthday != null">
+				birthday = #{user.birthday,jdbcType=DATE},
+			</if>
+			<if test="user.sex != null">
+				sex = #{user.sex,jdbcType=CHAR},
+			</if>
+			<if test="user.address != null">
+				address = #{user.address},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+
+	<update id="updateByExample" parameterType="map">
+		update user
+		set id = #{user.id},
+		username = #{user.username},
+		birthday = #{user.birthday,jdbcType=DATE},
+		sex =
+		#{user.sex,jdbcType=CHAR},
+		address = #{user.address}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<delete id="deleteByExample" parameterType="BaseExample">
+		delete from user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+
+	<select id="countByExample" parameterType="BaseExample"
+		resultType="java.lang.Integer">
+		select count(*) from user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<!-- Example的所有单表操作end -->
+
+	<!-- 常用sql start -->
+	<!-- 备注:常用sql 都需要进行修改条件语句的字段或者服务器名称 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where id = #{id}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from user
+		where id = #{id}
+	</delete>
+
+
+	<insert id="insert" parameterMap="BaseParameterMap">
+		<selectKey resultType="int" keyProperty="id">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into user (id,
+		username,
+		birthday,
+		sex, address)
+		values (#{id},
+		#{username},
+		#{birthday,jdbcType=DATE},
+		#{sex,jdbcType=CHAR},
+		#{address})
+	</insert>
+
+
+	<insert id="insertSelective" parameterMap="BaseParameterMap">
+		<selectKey resultType="int" keyProperty="id">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="username != null">
+				#{username},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=DATE},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=CHAR},
+			</if>
+			<if test="address != null">
+				#{address},
+			</if>
+		</trim>
+	</insert>
+	<!-- 常用sql end -->
+
+
+
+
+	<!-- 自定义多表查询 -->
+	<!--去重复，多重排序，比较查询，分页 -->
+	<select id="selectByUserName" parameterMap="BaseParameterMap"
+		resultMap="BaseResultMap">
+		select distinct
+		*
+		from user
+		<if test="_parameter != null">
+			where username like CONCAT(CONCAT('%', #{username}), '%')
+			ORDER BY
+			`id` ,`birthday` desc
+			<if test="pagesize > 0 ">
+				limit #{start},#{pagesize}
+			</if>
+		</if>
+	</select>
+
+	<!-- in /not in的使用 -->
+	<select id="selectInIds" parameterMap="BaseParameterMap"
+		resultMap="BaseResultMap">
+		select distinct
+		<include refid="Base_Column_List" />
+		from user
+		<!--where标签使用方式,如果有条件才添加where语句 -->
+		<where>
+			<!-- trim标签，使用()包裹，而且可以自动过滤掉第一个符合条件的前缀，这里指定第一个符合条件的sql语句去掉and -->
+			<trim prefix="(" suffix=")" prefixOverrides="and">
+				<if test="ids!=null and ids!=''">
+					and id
+					<if test="username=='张三'">not</if><!-- 这里通过条件判断究竟是要in还是not in -->
+					in (${ids})
+				</if>
+			</trim>
+		</where>
+	</select>
+
+
+	<select id="selectUsersByType" resultType="java.util.List" resultMap="BaseResultMap">
+		select * from user
+		where
+		id in
+		<!-- foreach主要用于in条件语句,collection是传过来的list集合，里边装着id，item是每个id，open和close最后用什么包裹，separator是每个id之间的分隔符 -->
+		<foreach collection="list" item="item" index="index" open="("
+			close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+
+
+</mapper>

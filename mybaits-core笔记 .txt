@@ -1,0 +1,30 @@
+MyBatisGenerator		入口
+ public void generate(ProgressCallback callback, Set<String> contextIds,
+            Set<String> fullyQualifiedTableNames)
+
+       context.generateFiles(callback, generatedJavaFiles,
+                    generatedXmlFiles, warnings);
+                    
+JavaMapperGenerator   可定制   所有要填充的方法和顺序
+	GeneratedJavaFile.getFormattedContent
+				DefaultJavaFormatter.getFormattedContent
+					TopLevelClass.getFormattedContent   生成java头 
+						InnerClass.getFormattedContent(int indentLevel, CompilationUnit compilationUnit)	生成java体
+							JavaElement.addFormattedJavadoc(StringBuilder sb, int indentLevel)  			java注释
+							Method.getFormattedContent(int indentLevel, boolean interfaceMethod, CompilationUnit compilationUnit)  生成java的get方法和set方法
+
+
+XMLMapperGenerator   可定制   所有要填充的方法和顺序
+	|-initializeAndExecuteGenerator 通用采集内容
+		elementGenerator.setContext(context);
+        elementGenerator.setIntrospectedTable(introspectedTable);
+        elementGenerator.setProgressCallback(progressCallback);
+        elementGenerator.setWarnings(warnings);
+        elementGenerator.addElements(parentElement);
+
+
+
+配置文件解析器。解析xml内容
+MyBatisGeneratorConfigurationParser（根据if，推测出想要的功能）
+
+

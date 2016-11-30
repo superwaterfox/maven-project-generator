@@ -1,0 +1,54 @@
+# kdiff3 ignore
+*.orig
+
+# maven ignore
+target/
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+classes/
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+#datasource ignore
+db.properties
+generatorConfigMyBatis3.xml
+
+#redis ignore
+spring-redis.xml
+
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz
+
+#location
+.metadata
+RemoteSystemsTempFiles
+Servers
+.externalToolBuilders
+out/
+bin/
+.springBeans
+catalina.base_IS_UNDEFINED/
+nohup.out
+

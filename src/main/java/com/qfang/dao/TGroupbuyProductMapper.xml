@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfang.dao.TGroupbuyProductMapper">
+    <resultMap id="BaseResultMap" type="com.qfang.model.TGroupbuyProduct">
+        <id column="FId" jdbcType="INTEGER" property="FId" />
+        <result column="FEntityId" jdbcType="INTEGER" property="FEntityId" />
+        <result column="FEntityType" jdbcType="VARCHAR" property="FEntityType" />
+        <result column="FEntityName" jdbcType="VARCHAR" property="FEntityName" />
+        <result column="FTitle" jdbcType="VARCHAR" property="FTitle" />
+        <result column="FSubtitle" jdbcType="VARCHAR" property="FSubtitle" />
+        <result column="FFavorableTitle" jdbcType="VARCHAR" property="FFavorableTitle" />
+        <result column="FStartTime" jdbcType="TIMESTAMP" property="FStartTime" />
+        <result column="FEndTime" jdbcType="TIMESTAMP" property="FEndTime" />
+        <result column="FOriginalPrice" jdbcType="VARCHAR" property="FOriginalPrice" />
+        <result column="FFavorablePrice" jdbcType="VARCHAR" property="FFavorablePrice" />
+        <result column="FPhone" jdbcType="VARCHAR" property="FPhone" />
+        <result column="FCoverPic" jdbcType="VARCHAR" property="FCoverPic" />
+        <result column="FAppCoverPic" jdbcType="VARCHAR" property="FAppCoverPic" />
+        <result column="FStatus" jdbcType="VARCHAR" property="FStatus" />
+        <result column="FCustomerCount" jdbcType="INTEGER" property="FCustomerCount" />
+        <result column="FClickCount" jdbcType="INTEGER" property="FClickCount" />
+        <result column="FLevel" jdbcType="DECIMAL" property="FLevel" />
+        <result column="FTitle1" jdbcType="VARCHAR" property="FTitle1" />
+        <result column="FTitle2" jdbcType="VARCHAR" property="FTitle2" />
+        <result column="FTitle3" jdbcType="VARCHAR" property="FTitle3" />
+        <result column="FPic1" jdbcType="VARCHAR" property="FPic1" />
+        <result column="FPic2" jdbcType="VARCHAR" property="FPic2" />
+        <result column="FPic3" jdbcType="VARCHAR" property="FPic3" />
+        <result column="FUpdateTime" jdbcType="TIMESTAMP" property="FUpdateTime" />
+        <result column="FCreateTime" jdbcType="TIMESTAMP" property="FCreateTime" />
+        <result column="FDetailPic" jdbcType="VARCHAR" property="FDetailPic" />
+        <result column="FOtherPic" jdbcType="VARCHAR" property="FOtherPic" />
+        <result column="FRecommend" jdbcType="BIT" property="FRecommend" />
+        <result column="FCity" jdbcType="VARCHAR" property="FCity" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.qfang.model.TGroupbuyProductWithBLOBs">
+        <result column="FDesc1" jdbcType="LONGVARCHAR" property="FDesc1" />
+        <result column="FDesc2" jdbcType="LONGVARCHAR" property="FDesc2" />
+        <result column="FDesc3" jdbcType="LONGVARCHAR" property="FDesc3" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        FId, FEntityId, FEntityType, FEntityName, FTitle, FSubtitle, FFavorableTitle, FStartTime, 
+        FEndTime, FOriginalPrice, FFavorablePrice, FPhone, FCoverPic, FAppCoverPic, FStatus, 
+        FCustomerCount, FClickCount, FLevel, FTitle1, FTitle2, FTitle3, FPic1, FPic2, FPic3, 
+        FUpdateTime, FCreateTime, FDetailPic, FOtherPic, FRecommend, FCity
+    </sql>
+    <sql id="Blob_Column_List">
+        FDesc1, FDesc2, FDesc3
+    </sql>
+    <insert id="insert" parameterType="com.qfang.model.TGroupbuyProductWithBLOBs">
+        insert into t_groupbuy_product (FId, FEntityId, FEntityType, 
+            FEntityName, FTitle, FSubtitle, 
+            FFavorableTitle, FStartTime, FEndTime, 
+            FOriginalPrice, FFavorablePrice, FPhone, 
+            FCoverPic, FAppCoverPic, FStatus, 
+            FCustomerCount, FClickCount, FLevel, 
+            FTitle1, FTitle2, FTitle3, 
+            FPic1, FPic2, FPic3, 
+            FUpdateTime, FCreateTime, FDetailPic, 
+            FOtherPic, FRecommend, FCity, 
+            FDesc1, FDesc2, FDesc3
+            )
+        values (#{FId,jdbcType=INTEGER}, #{FEntityId,jdbcType=INTEGER}, #{FEntityType,jdbcType=VARCHAR}, 
+            #{FEntityName,jdbcType=VARCHAR}, #{FTitle,jdbcType=VARCHAR}, #{FSubtitle,jdbcType=VARCHAR}, 
+            #{FFavorableTitle,jdbcType=VARCHAR}, #{FStartTime,jdbcType=TIMESTAMP}, #{FEndTime,jdbcType=TIMESTAMP}, 
+            #{FOriginalPrice,jdbcType=VARCHAR}, #{FFavorablePrice,jdbcType=VARCHAR}, #{FPhone,jdbcType=VARCHAR}, 
+            #{FCoverPic,jdbcType=VARCHAR}, #{FAppCoverPic,jdbcType=VARCHAR}, #{FStatus,jdbcType=VARCHAR}, 
+            #{FCustomerCount,jdbcType=INTEGER}, #{FClickCount,jdbcType=INTEGER}, #{FLevel,jdbcType=DECIMAL}, 
+            #{FTitle1,jdbcType=VARCHAR}, #{FTitle2,jdbcType=VARCHAR}, #{FTitle3,jdbcType=VARCHAR}, 
+            #{FPic1,jdbcType=VARCHAR}, #{FPic2,jdbcType=VARCHAR}, #{FPic3,jdbcType=VARCHAR}, 
+            #{FUpdateTime,jdbcType=TIMESTAMP}, #{FCreateTime,jdbcType=TIMESTAMP}, #{FDetailPic,jdbcType=VARCHAR}, 
+            #{FOtherPic,jdbcType=VARCHAR}, #{FRecommend,jdbcType=BIT}, #{FCity,jdbcType=VARCHAR}, 
+            #{FDesc1,jdbcType=LONGVARCHAR}, #{FDesc2,jdbcType=LONGVARCHAR}, #{FDesc3,jdbcType=LONGVARCHAR}
+            )
+    </insert>
+    <insert id="insertSelective" parameterType="com.qfang.model.TGroupbuyProductWithBLOBs">
+        insert into t_groupbuy_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="FId != null">
+                FId,
+            </if>
+            <if test="FEntityId != null">
+                FEntityId,
+            </if>
+            <if test="FEntityType != null">
+                FEntityType,
+            </if>
+            <if test="FEntityName != null">
+                FEntityName,
+            </if>
+            <if test="FTitle != null">
+                FTitle,
+            </if>
+            <if test="FSubtitle != null">
+                FSubtitle,
+            </if>
+            <if test="FFavorableTitle != null">
+                FFavorableTitle,
+            </if>
+            <if test="FStartTime != null">
+                FStartTime,
+            </if>
+            <if test="FEndTime != null">
+                FEndTime,
+            </if>
+            <if test="FOriginalPrice != null">
+                FOriginalPrice,
+            </if>
+            <if test="FFavorablePrice != null">
+                FFavorablePrice,
+            </if>
+            <if test="FPhone != null">
+                FPhone,
+            </if>
+            <if test="FCoverPic != null">
+                FCoverPic,
+            </if>
+            <if test="FAppCoverPic != null">
+                FAppCoverPic,
+            </if>
+            <if test="FStatus != null">
+                FStatus,
+            </if>
+            <if test="FCustomerCount != null">
+                FCustomerCount,
+            </if>
+            <if test="FClickCount != null">
+                FClickCount,
+            </if>
+            <if test="FLevel != null">
+                FLevel,
+            </if>
+            <if test="FTitle1 != null">
+                FTitle1,
+            </if>
+            <if test="FTitle2 != null">
+                FTitle2,
+            </if>
+            <if test="FTitle3 != null">
+                FTitle3,
+            </if>
+            <if test="FPic1 != null">
+                FPic1,
+            </if>
+            <if test="FPic2 != null">
+                FPic2,
+            </if>
+            <if test="FPic3 != null">
+                FPic3,
+            </if>
+            <if test="FUpdateTime != null">
+                FUpdateTime,
+            </if>
+            <if test="FCreateTime != null">
+                FCreateTime,
+            </if>
+            <if test="FDetailPic != null">
+                FDetailPic,
+            </if>
+            <if test="FOtherPic != null">
+                FOtherPic,
+            </if>
+            <if test="FRecommend != null">
+                FRecommend,
+            </if>
+            <if test="FCity != null">
+                FCity,
+            </if>
+            <if test="FDesc1 != null">
+                FDesc1,
+            </if>
+            <if test="FDesc2 != null">
+                FDesc2,
+            </if>
+            <if test="FDesc3 != null">
+                FDesc3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="FId != null">
+                #{FId,jdbcType=INTEGER},
+            </if>
+            <if test="FEntityId != null">
+                #{FEntityId,jdbcType=INTEGER},
+            </if>
+            <if test="FEntityType != null">
+                #{FEntityType,jdbcType=VARCHAR},
+            </if>
+            <if test="FEntityName != null">
+                #{FEntityName,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle != null">
+                #{FTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FSubtitle != null">
+                #{FSubtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FFavorableTitle != null">
+                #{FFavorableTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FStartTime != null">
+                #{FStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FEndTime != null">
+                #{FEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FOriginalPrice != null">
+                #{FOriginalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="FFavorablePrice != null">
+                #{FFavorablePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="FPhone != null">
+                #{FPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="FCoverPic != null">
+                #{FCoverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FAppCoverPic != null">
+                #{FAppCoverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FStatus != null">
+                #{FStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="FCustomerCount != null">
+                #{FCustomerCount,jdbcType=INTEGER},
+            </if>
+            <if test="FClickCount != null">
+                #{FClickCount,jdbcType=INTEGER},
+            </if>
+            <if test="FLevel != null">
+                #{FLevel,jdbcType=DECIMAL},
+            </if>
+            <if test="FTitle1 != null">
+                #{FTitle1,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle2 != null">
+                #{FTitle2,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle3 != null">
+                #{FTitle3,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic1 != null">
+                #{FPic1,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic2 != null">
+                #{FPic2,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic3 != null">
+                #{FPic3,jdbcType=VARCHAR},
+            </if>
+            <if test="FUpdateTime != null">
+                #{FUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FCreateTime != null">
+                #{FCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FDetailPic != null">
+                #{FDetailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FOtherPic != null">
+                #{FOtherPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FRecommend != null">
+                #{FRecommend,jdbcType=BIT},
+            </if>
+            <if test="FCity != null">
+                #{FCity,jdbcType=VARCHAR},
+            </if>
+            <if test="FDesc1 != null">
+                #{FDesc1,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="FDesc2 != null">
+                #{FDesc2,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="FDesc3 != null">
+                #{FDesc3,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select 
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from t_groupbuy_product
+        where FId = #{FId,jdbcType=INTEGER}
+    </select>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qfang.model.TGroupbuyProductWithBLOBs">
+        update t_groupbuy_product
+        <set>
+            <if test="FEntityId != null">
+                FEntityId = #{FEntityId,jdbcType=INTEGER},
+            </if>
+            <if test="FEntityType != null">
+                FEntityType = #{FEntityType,jdbcType=VARCHAR},
+            </if>
+            <if test="FEntityName != null">
+                FEntityName = #{FEntityName,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle != null">
+                FTitle = #{FTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FSubtitle != null">
+                FSubtitle = #{FSubtitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FFavorableTitle != null">
+                FFavorableTitle = #{FFavorableTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="FStartTime != null">
+                FStartTime = #{FStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FEndTime != null">
+                FEndTime = #{FEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FOriginalPrice != null">
+                FOriginalPrice = #{FOriginalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="FFavorablePrice != null">
+                FFavorablePrice = #{FFavorablePrice,jdbcType=VARCHAR},
+            </if>
+            <if test="FPhone != null">
+                FPhone = #{FPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="FCoverPic != null">
+                FCoverPic = #{FCoverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FAppCoverPic != null">
+                FAppCoverPic = #{FAppCoverPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FStatus != null">
+                FStatus = #{FStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="FCustomerCount != null">
+                FCustomerCount = #{FCustomerCount,jdbcType=INTEGER},
+            </if>
+            <if test="FClickCount != null">
+                FClickCount = #{FClickCount,jdbcType=INTEGER},
+            </if>
+            <if test="FLevel != null">
+                FLevel = #{FLevel,jdbcType=DECIMAL},
+            </if>
+            <if test="FTitle1 != null">
+                FTitle1 = #{FTitle1,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle2 != null">
+                FTitle2 = #{FTitle2,jdbcType=VARCHAR},
+            </if>
+            <if test="FTitle3 != null">
+                FTitle3 = #{FTitle3,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic1 != null">
+                FPic1 = #{FPic1,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic2 != null">
+                FPic2 = #{FPic2,jdbcType=VARCHAR},
+            </if>
+            <if test="FPic3 != null">
+                FPic3 = #{FPic3,jdbcType=VARCHAR},
+            </if>
+            <if test="FUpdateTime != null">
+                FUpdateTime = #{FUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FCreateTime != null">
+                FCreateTime = #{FCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="FDetailPic != null">
+                FDetailPic = #{FDetailPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FOtherPic != null">
+                FOtherPic = #{FOtherPic,jdbcType=VARCHAR},
+            </if>
+            <if test="FRecommend != null">
+                FRecommend = #{FRecommend,jdbcType=BIT},
+            </if>
+            <if test="FCity != null">
+                FCity = #{FCity,jdbcType=VARCHAR},
+            </if>
+            <if test="FDesc1 != null">
+                FDesc1 = #{FDesc1,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="FDesc2 != null">
+                FDesc2 = #{FDesc2,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="FDesc3 != null">
+                FDesc3 = #{FDesc3,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where FId = #{FId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qfang.model.TGroupbuyProductWithBLOBs">
+        update t_groupbuy_product
+        set FEntityId = #{FEntityId,jdbcType=INTEGER},
+            FEntityType = #{FEntityType,jdbcType=VARCHAR},
+            FEntityName = #{FEntityName,jdbcType=VARCHAR},
+            FTitle = #{FTitle,jdbcType=VARCHAR},
+            FSubtitle = #{FSubtitle,jdbcType=VARCHAR},
+            FFavorableTitle = #{FFavorableTitle,jdbcType=VARCHAR},
+            FStartTime = #{FStartTime,jdbcType=TIMESTAMP},
+            FEndTime = #{FEndTime,jdbcType=TIMESTAMP},
+            FOriginalPrice = #{FOriginalPrice,jdbcType=VARCHAR},
+            FFavorablePrice = #{FFavorablePrice,jdbcType=VARCHAR},
+            FPhone = #{FPhone,jdbcType=VARCHAR},
+            FCoverPic = #{FCoverPic,jdbcType=VARCHAR},
+            FAppCoverPic = #{FAppCoverPic,jdbcType=VARCHAR},
+            FStatus = #{FStatus,jdbcType=VARCHAR},
+            FCustomerCount = #{FCustomerCount,jdbcType=INTEGER},
+            FClickCount = #{FClickCount,jdbcType=INTEGER},
+            FLevel = #{FLevel,jdbcType=DECIMAL},
+            FTitle1 = #{FTitle1,jdbcType=VARCHAR},
+            FTitle2 = #{FTitle2,jdbcType=VARCHAR},
+            FTitle3 = #{FTitle3,jdbcType=VARCHAR},
+            FPic1 = #{FPic1,jdbcType=VARCHAR},
+            FPic2 = #{FPic2,jdbcType=VARCHAR},
+            FPic3 = #{FPic3,jdbcType=VARCHAR},
+            FUpdateTime = #{FUpdateTime,jdbcType=TIMESTAMP},
+            FCreateTime = #{FCreateTime,jdbcType=TIMESTAMP},
+            FDetailPic = #{FDetailPic,jdbcType=VARCHAR},
+            FOtherPic = #{FOtherPic,jdbcType=VARCHAR},
+            FRecommend = #{FRecommend,jdbcType=BIT},
+            FCity = #{FCity,jdbcType=VARCHAR},
+            FDesc1 = #{FDesc1,jdbcType=LONGVARCHAR},
+            FDesc2 = #{FDesc2,jdbcType=LONGVARCHAR},
+            FDesc3 = #{FDesc3,jdbcType=LONGVARCHAR}
+        where FId = #{FId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qfang.model.TGroupbuyProduct">
+        update t_groupbuy_product
+        set FEntityId = #{FEntityId,jdbcType=INTEGER},
+            FEntityType = #{FEntityType,jdbcType=VARCHAR},
+            FEntityName = #{FEntityName,jdbcType=VARCHAR},
+            FTitle = #{FTitle,jdbcType=VARCHAR},
+            FSubtitle = #{FSubtitle,jdbcType=VARCHAR},
+            FFavorableTitle = #{FFavorableTitle,jdbcType=VARCHAR},
+            FStartTime = #{FStartTime,jdbcType=TIMESTAMP},
+            FEndTime = #{FEndTime,jdbcType=TIMESTAMP},
+            FOriginalPrice = #{FOriginalPrice,jdbcType=VARCHAR},
+            FFavorablePrice = #{FFavorablePrice,jdbcType=VARCHAR},
+            FPhone = #{FPhone,jdbcType=VARCHAR},
+            FCoverPic = #{FCoverPic,jdbcType=VARCHAR},
+            FAppCoverPic = #{FAppCoverPic,jdbcType=VARCHAR},
+            FStatus = #{FStatus,jdbcType=VARCHAR},
+            FCustomerCount = #{FCustomerCount,jdbcType=INTEGER},
+            FClickCount = #{FClickCount,jdbcType=INTEGER},
+            FLevel = #{FLevel,jdbcType=DECIMAL},
+            FTitle1 = #{FTitle1,jdbcType=VARCHAR},
+            FTitle2 = #{FTitle2,jdbcType=VARCHAR},
+            FTitle3 = #{FTitle3,jdbcType=VARCHAR},
+            FPic1 = #{FPic1,jdbcType=VARCHAR},
+            FPic2 = #{FPic2,jdbcType=VARCHAR},
+            FPic3 = #{FPic3,jdbcType=VARCHAR},
+            FUpdateTime = #{FUpdateTime,jdbcType=TIMESTAMP},
+            FCreateTime = #{FCreateTime,jdbcType=TIMESTAMP},
+            FDetailPic = #{FDetailPic,jdbcType=VARCHAR},
+            FOtherPic = #{FOtherPic,jdbcType=VARCHAR},
+            FRecommend = #{FRecommend,jdbcType=BIT},
+            FCity = #{FCity,jdbcType=VARCHAR}
+        where FId = #{FId,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_groupbuy_product
+        where FId = #{FId,jdbcType=INTEGER}
+    </delete>
+</mapper>
